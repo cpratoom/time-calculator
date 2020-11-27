@@ -23,7 +23,8 @@ def add_time(start, duration, startday=None):
     ap = ["AM", "PM"]
     dayofweek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
     
-    term1 = str(hh12)
+    #reformatting midnight from 00:mm --> 12:mm
+    term1 = (str(12) if hh12==0 else str(hh12) )
     term2 = str(mins).rjust(2, '0')
     term3 = ap[apidx]
     
@@ -32,7 +33,7 @@ def add_time(start, duration, startday=None):
             new_time = "{}:{} {}".format(term1, term2, term3)
         else:
             xdays_label = ("(next day)" if xdays==1 else "({} days later)".format(xdays))
-            new_time = "{}:{} {}, {}".format(term1, term2, term3, xdays_label)
+            new_time = "{}:{} {} {}".format(term1, term2, term3, xdays_label)
     else:
         a, idxw = divmod(dayofweek.index(startday.lower())+xdays, 7)
         term4 = dayofweek[idxw].capitalize()
